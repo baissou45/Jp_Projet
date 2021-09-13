@@ -58,4 +58,8 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function commandes(){
+        return $this->hasMany(Commande::class);
+    }
 }
