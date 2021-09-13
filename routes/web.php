@@ -17,6 +17,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/accueil', function () {
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('index');
+})->name('dashboard');
+
+
+
+/*
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+
+    Route::get('/dashboard', function ($id) {
+        return view('index');
+    });
+
 });
+*/
