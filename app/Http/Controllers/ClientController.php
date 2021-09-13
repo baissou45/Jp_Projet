@@ -12,15 +12,23 @@ class ClientController extends Controller
 
     public function index(){
         $clients = Client::all();
+        return view('client.index', compact('clients'));
     }
 
     public function client($id){
         $client = Client::find($id);
+    }
 
+    public function add(){
+        return view('client.newClient');
+    }
+
+    public function edit($id){
+        $client = Client::find($id);
+        return view('client.updateClient', compact('client'));
     }
 
     public function newClient(Request $request){
-
         $validator = Validator::make($request->all(), [
             'nomComplet' =>'required',
             'num' => 'required',
@@ -30,9 +38,8 @@ class ClientController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('contact-form')
-                        ->withErrors($validator)
-                        ->withInput();
+            dd($validator);
+            return redirect()->back()->withErrors($validator)->withInput();
         } else {
 
             $client = new Client;
@@ -44,8 +51,9 @@ class ClientController extends Controller
             $client -> entreprise = $request -> entreprise;
 
             $client -> save();
-
         }
+
+        return view('dashboard')->with('succes', 'Le client à été ajouter avec succes');
     }
 
 
@@ -60,9 +68,7 @@ class ClientController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('contact-form')
-                        ->withErrors($validator)
-                        ->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         } else {
 
             $client = Client::find($request->id);
@@ -75,15 +81,17 @@ class ClientController extends Controller
                 'entreprise' => $request -> entreprise
             ]);
 
+            return view('dashboard')->with('succes', 'Le client à été modifier avec succes');
         }
     }
 
-    public function deleteClient(Request $request){
+    public function deleteClient($id){
 
-            $client = Client::find($request->id);
-            $client -> destroy();
+            $client = Client::find($id);
+            $client -> delete();
+            return redirect()->route('client.index');
 
-        }
+    }
 
 
 }

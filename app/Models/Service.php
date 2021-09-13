@@ -12,6 +12,7 @@ class Service extends Model
     protected $fillable = ['nom', 'prix', 'description'];
 
     public function packs(){
-        return $this->belongsToMany(Pack::class);
+        return $this->belongsToMany(Pack::class)->withPivot('quantite');
     }
+
 }

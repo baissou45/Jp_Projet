@@ -17,7 +17,6 @@ class CreatePivotTablePackService extends Migration
             $table->foreignId('pack_id')->constrained()->onDelete('cascade');
             $table->foreignId('service_id')->constrained()->onDelete('cascade');
             $table->string('quantite')->default('1');
-            $table->timestamps();
         });
     }
 

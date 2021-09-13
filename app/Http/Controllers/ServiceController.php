@@ -6,32 +6,41 @@ use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
+
 class ServiceController extends Controller
 {
     public function index(){
-        $Services = Service::all();
+        $services = Service::all();
+        return view('service.index', compact('services'));
+    }
+    public function service($id){
+        $service = Service::find($id);
     }
 
-    public function Service($id){
-        $Service = Service::find($id);
+    public function add(){
+        return view('service.newService');
+    }
+
+    public function edit($id){
+        $service = Service::find($id);
+        return view('service.updateService', compact('service'));
     }
 
     public function newService(Request $request){
 
         $validator = Validator::make($request->all(), [
 
-            'nom' => 'require',
-            'prix' => 'require',
+            'nom' => 'required',
+            'prix' => 'required',
             'description' => 'nullable',
 
         ]);
 
         if ($validator->fails()) {
-            return redirect('contact-form')
-                        ->withErrors($validator)
-                        ->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         } else {
 
+            // dd($request->all());
             $service = new Service;
 
             $service -> nom = $request -> nom;
@@ -40,6 +49,7 @@ class ServiceController extends Controller
 
             $service -> save();
 
+        return view('dashboard')->with('succes', 'Le service à été ajouter avec succes');
         }
     }
 
@@ -55,14 +65,12 @@ class ServiceController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return redirect('contact-form')
-                        ->withErrors($validator)
-                        ->withInput();
+            return redirect()->back()->withErrors($validator)->withInput();
         } else {
 
-            $Service = Service::find($request->id);
+            $service = Service::find($request->id);
 
-            $Service->update([
+            $service->update([
                 'nomComplet' => $request -> nomComplet,
                 'num' => $request -> num,
                 'mail' => $request -> mail,
@@ -70,13 +78,15 @@ class ServiceController extends Controller
                 'entreprise' => $request -> entreprise
             ]);
 
+        return view('dashboard')->with('succes', 'Le service à été ajouter avec succes');
         }
     }
 
     public function deleteService(Request $request){
 
-            $Service = Service::find($request->id);
-            $Service -> destroy();
+            $service = Service::find($request->id);
+            $service -> delete();
+            return redirect()->route('service.index');
 
     }
 }
