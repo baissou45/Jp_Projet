@@ -57,11 +57,9 @@ class ServiceController extends Controller
     public function updateService(Request $request){
 
         $validator = Validator::make($request->all(), [
-            'nomComplet' =>'required',
-            'num' => 'required',
-            'mail' => 'required|email',
-            'type' => 'required',
-            'entreprise' => 'nullable',
+            'nom' => 'required',
+            'prix' => 'required',
+            'description' => 'nullable',
         ]);
 
         if ($validator->fails()) {
@@ -71,14 +69,12 @@ class ServiceController extends Controller
             $service = Service::find($request->id);
 
             $service->update([
-                'nomComplet' => $request -> nomComplet,
-                'num' => $request -> num,
-                'mail' => $request -> mail,
-                'type' => $request -> type,
-                'entreprise' => $request -> entreprise
+                'nom' => $request->nom,
+                'prix' => $request->prix,
+                'description' => $request->description,
             ]);
 
-        return view('dashboard')->with('succes', 'Le service à été ajouter avec succes');
+            return redirect()->route('dashbord')->with('succes', 'Le service à été ajouter avec succes');
         }
     }
 

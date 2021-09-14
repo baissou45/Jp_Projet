@@ -17,10 +17,13 @@ class Controller extends BaseController
 
     public function accueil(){
         $clients = Client::all();
-        $commandes = Commande::all();
+        $commandes = Commande::limit(5)->orderBy('id', 'desc')->get();
         $services = Service::all();
         $packs = Pack::all();
 
-        return view('accueil', compact('clients','commandes','services','packs'));
+        $attenteCommande = Commande::where('etat', "En cours")->get();
+        $nbrCommande = count($attenteCommande);
+
+        return view('accueil', compact('clients','commandes','services','packs', 'nbrCommande'));
     }
 }

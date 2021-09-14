@@ -8,44 +8,50 @@
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Nouveau client</h3></div>
                     <div class="card-body">
-                        <form method="post" action="{{route('client.store')}}">
+                        <form method="post" action="{{route('commande.store')}}">
                             @csrf
                             <div class="row mb-3">
-                                <div class="col-md-12">
-                                    <div class="form-floating">
-                                        <input class="form-control" id="inputLastName" name="nomComplet" type="text" placeholder="Entrer votre nom complet" />
-                                        <label for="inputLastName">Nom complet</label>
-                                    </div>
+                                <div class="form-group col-md-12">
+                                    <label for="inputLastName">Client</label>
+                                    <select name="client" id="type" class="selDiv form-control">
+                                        @forelse ($clients as $client)
+                                            <option value="{{$client->id}}"> {{$client->nomComplet}} </option>
+                                        @empty
+                                            <center> Aucun client trouvé </center>
+                                        @endforelse
+                                    </select>
+                                    @if ($errors->has('client'))
+                                        <div class="text-danger">
+                                            {{ $errors->first('client') }}
+                                        </div>
+                                    @endif
                                 </div>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="num" name="num" type="tel" placeholder="Entrer votre numero de telephone" />
-                                <label for="inputEmail">Numero de telephone</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="inputEmail" name="mail" type="email" placeholder="name@example" />
-                                <label for="inputEmail">Adresse E-mail</label>
                             </div>
                             <div class="row mb-3">
-                                <div class="col-md-6" >
-                                    <div class="form-floating mb-3 mb-md-0">
-                                        <select name="type" id="type" class="selDiv form-control">
-                                            <option value="personnel">Personnel</option>
-                                            <option value="entreprise">Entreprise</option>
-                                        </select>
-                                        <label for="type">Type</label>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" id="entreprise" type="text" placeholder="Nom de la structure" class="disabled" />
-                                        <label for="entreprise">Nom de la structure</label>
-                                    </div>
+                                <div class="form-group col-md-12">
+                                    <label for="inputLastName">Pack</label>
+                                    <select name="pack" id="pack" class="selDiv form-control">
+                                        @forelse ($packs as $pack)
+                                            <option value="{{$pack->id}}"> {{$pack->nom . ' - ' . $pack->prix}} </option>
+                                        @empty
+                                            <center> Aucun pack trouvé </center>
+                                        @endforelse
+                                    </select>
+                                    @if ($errors->has('pack'))
+                                        <div class="text-danger">
+                                            {{ $errors->first('pack') }}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-floating mb-3">
-                                <textarea name="description" class="form-control" ></textarea>
-                                <label for="inputEmail">Description</label>
+                                <textarea name="note" class="form-control" ></textarea>
+                                <label for="inputEmail">Note personnnel</label>
+                                @if ($errors->has('note'))
+                                    <div class="text-danger">
+                                        {{ $errors->first('note') }}
+                                    </div>
+                                @endif
                             </div>
                             <div class="mt-4 mb-0">
                                 <button type="submit" class="btn btn-primary">Ajouter le client</button>

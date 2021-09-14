@@ -41,7 +41,7 @@
             <div class="card-body">Commande en cours</div>
             <div class="card-footer justify-content-between">
                 <center>
-                    <h2> {{ count($commandes) }} </h2>
+                    <h2> {{ $nbrCommande }} </h2>
                 </center>
             </div>
         </div>
@@ -57,51 +57,65 @@
         <table id="datatablesSimple">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>Client</th>
+                    <th>Contact client</th>
+                    <th>Utilisateur</th>
+                    <th>Prix</th>
+                    <th>Etat</th>
+                    <th>Date commande</th>
+                    <th>Note personnelle</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <th>Name</th>
-                    <th>Position</th>
-                    <th>Office</th>
-                    <th>Age</th>
-                    <th>Start date</th>
-                    <th>Salary</th>
+                    <th>Client</th>
+                    <th>Contact client</th>
+                    <th>Utilisateur</th>
+                    <th>Prix</th>
+                    <th>Etat</th>
+                    <th>Date commande</th>
+                    <th>Note personnelle</th>
+                    <th>Action</th>
                 </tr>
             </tfoot>
             <tbody>
-                <tr>
-                    <td>Tiger Nixon</td>
-                    <td>System Architect</td>
-                    <td>Edinburgh</td>
-                    <td>61</td>
-                    <td>2011/04/25</td>
-                    <td>$320,800</td>
-                </tr>
-                <tr>
-                    <td>Garrett Winters</td>
-                    <td>Accountant</td>
-                    <td>Tokyo</td>
-                    <td>63</td>
-                    <td>2011/07/25</td>
-                    <td>$170,750</td>
-                </tr>
-                <tr>
-                    <td>Donna Snider</td>
-                    <td>Customer Support</td>
-                    <td>New York</td>
-                    <td>27</td>
-                    <td>2011/01/25</td>
-                    <td>$112,000</td>
-                </tr>
+                @forelse ($commandes as $commande)
+                    <tr>
+                        <td> {{ $commande->client->nomComplet }} </td>
+                        <td> {{ $commande->client->num }} </td>
+                        <td> {{ $commande->user->name }} </td>
+                        <td> {{ $commande->pack->prix }} </td>
+                        <td class=" {{ ($commande->etat == 'Fini') ? 'text-success' : ( ($commande->etat == 'Annuler') ? 'text-danger' : 'text-primary' ) }} "> {{ $commande->etat }} </td>
+                        <td> {{ $commande->created_at }} </td>
+                        <td> {{ ($commande->note ) ? $commande->note : "Aucune note"}} </td>
+                        <td class="justify-between">
+                            <a href="{{route('commande.edit', $commande->id)}}" class="m-2"><i class="fa fa-edit"></i></a>
+                            <a href="{{route('commande.delete', $commande->id)}}">
+                                <i class="fa fa-trash" id="remove"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @empty
+
+                @endforelse
+
             </tbody>
         </table>
     </div>
 </div>
+
+{{-- {{dd(session)}} --}}
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="{{asset('template/js/toat.js')}}"></script>
+
+<script>
+    $(function() {
+        @if(Session::has('succes'))
+            toastr.success("{{ Session::get('success') }}");
+        @endif
+    });
+</script>
+
 @endsection

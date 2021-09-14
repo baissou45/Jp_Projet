@@ -21,7 +21,8 @@ class PackController extends Controller
 
     public function edit($id){
         $pack = Pack::find($id);
-        return view('pack.updatePack', compact('pack'));
+        $services = Service::all();
+        return view('pack.updatePack', compact('pack', 'services'));
     }
 
     public function newPack(Request $request){
@@ -46,7 +47,7 @@ class PackController extends Controller
 
             $prix = 0;
 
-            dd($request->all());
+            // dd($request->all());
             $pack -> save();
 
             for ($i = 0 ; $i < count($request->service); $i++) {
@@ -77,7 +78,7 @@ class PackController extends Controller
             );
         }
 
-        return view('blanc');
+        return redirect()->route('dashbord')->with('succes', 'Le pack à été créer avec succes');
     }
 
 
@@ -115,7 +116,7 @@ class PackController extends Controller
                 $pack->services()->attach($request->service[$i]);
             }
 
-            return redirect()->route('pack.quantite', $pack->id)->with('succes', 'Le pack à été créer avec succes');
+            return redirect()->route('pack.quantite', $pack->id);
 
         }
     }

@@ -12,40 +12,63 @@
                             @csrf
                             <div class="row mb-3">
                                 <div class="col-md-12">
-                                    <div class="form-floating">
-                                        <input class="form-control" id="inputLastName" name="nomComplet" type="text" placeholder="Entrer votre nom complet" />
-                                        <label for="inputLastName">Nom complet</label>
-                                    </div>
+                                    <label for="inputLastName">Nom complet</label>
+                                    <input class="form-control" id="inputLastName" name="nomComplet" type="text" placeholder="Entrer votre nom complet" />
+                                    @if ($errors->has('nomComplet'))
+                                        <div class="text-danger">
+                                            {{ $errors->first('nomComplet') }}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="num" name="num" type="tel" placeholder="Entrer votre numero de telephone" />
+                            <div class="mb-3">
                                 <label for="inputEmail">Numero de telephone</label>
+                                <input class="form-control" id="num" name="num" type="tel" placeholder="Entrer votre numero de telephone" />
+                                 @if ($errors->has('num'))
+                                    <div class="text-danger">
+                                        {{ $errors->first('num') }}
+                                    </div>
+                                @endif
                             </div>
-                            <div class="form-floating mb-3">
-                                <input class="form-control" id="inputEmail" name="mail" type="email" placeholder="name@example" />
+                            <div class="mb-3">
                                 <label for="inputEmail">Adresse E-mail</label>
+                                <input class="form-control" id="inputEmail" name="mail" type="email" placeholder="name@example" />
+                                @if ($errors->has('mail'))
+                                    <div class="text-danger">
+                                        {{ $errors->first('mail') }}
+                                    </div>
+                                @endif
                             </div>
                             <div class="row mb-3">
                                 <div class="col-md-6" >
-                                    <div class="form-floating mb-3 mb-md-0">
+                                    <div class="mb-3 mb-md-0">
+                                        <label for="type">Type</label>
                                         <select name="type" id="type" class="selDiv form-control">
                                             <option value="personnel">Personnel</option>
                                             <option value="entreprise">Entreprise</option>
                                         </select>
-                                        <label for="type">Type</label>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
-                                    <div class="form-floating mb-3 mb-md-0">
-                                        <input class="form-control" id="entreprise" type="text" placeholder="Nom de la structure" class="disabled" />
+                                    <div class="mb-3 mb-md-0">
                                         <label for="entreprise">Nom de la structure</label>
+                                        <input class="form-control" id="entreprise" name="entreprise" type="text" placeholder="Nom de la structure" class="disabled" />
+                                         @if ($errors->has('entreprise'))
+                                            <div class="text-danger">
+                                                {{ $errors->first('entreprise') }}
+                                            </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
                             <div class="form-floating mb-3">
                                 <textarea name="description" class="form-control" ></textarea>
                                 <label for="inputEmail">Description</label>
+                                @if ($errors->has('description'))
+                                    <div class="text-danger">
+                                        {{ $errors->first('description') }}
+                                    </div>
+                                @endif
                             </div>
                             <div class="mt-4 mb-0">
                                 <button type="submit" class="btn btn-primary">Ajouter le client</button>

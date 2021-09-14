@@ -67,7 +67,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::post('/editPack', 'PackController@updatePack')->name('pack.update');
 
         Route::get('/quantite/{id}', 'PackController@addQuantite')->name('pack.quantite');
-        Route::post('/quantite', 'PackController@storeQuantite')->name('pack.quantite.update');
+        Route::post('/quantite', 'PackController@storeQuantite')->name('quantite.update');
 
         Route::get('/supressionPack/{id}', 'PackController@deletePack')->name('pack.delete');
 
@@ -77,7 +77,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         // Routes commandes
         Route::prefix('')->group(function () {
 
-            Route::get('/commande', 'PackController@index')->name('commande.index');
+            Route::get('/commande', 'CommandeController@index')->name('commande.index');
 
             Route::get('/nouveauCommande', 'CommandeController@add')->name('commande.add');
             Route::post('/nouveauCommande', 'CommandeController@newCommande')->name('commande.store');
@@ -85,8 +85,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::get('/editCommande/id-{id}', 'CommandeController@edit')->name('commande.edit');
             Route::post('/editCommande', 'CommandeController@updateCommande')->name('commande.update');
 
-            Route::get('/quantite/{id}', 'CommandeController@addQuantite')->name('commande.quantite');
-            Route::post('/quantite', 'CommandeController@storeQuantite')->name('commande.quantite.update');
+            // Route::get('/quantite/{id}', 'CommandeController@addQuantite')->name('commande.quantite');
+            // Route::post('/quantite', 'CommandeController@storeQuantite')->name('commande.quantite.update');
 
             Route::get('/supressionCommande/{id}', 'CommandeController@deleteCommande')->name('commande.delete');
 

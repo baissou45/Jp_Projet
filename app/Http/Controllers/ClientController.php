@@ -29,6 +29,7 @@ class ClientController extends Controller
     }
 
     public function newClient(Request $request){
+        // dd($request->all());
         $validator = Validator::make($request->all(), [
             'nomComplet' =>'required',
             'num' => 'required',
@@ -38,7 +39,7 @@ class ClientController extends Controller
         ]);
 
         if ($validator->fails()) {
-            dd($validator);
+            // dd($validator);
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
 
@@ -53,7 +54,7 @@ class ClientController extends Controller
             $client -> save();
         }
 
-        return view('dashboard')->with('succes', 'Le client à été ajouter avec succes');
+        return redirect()->route('dashbord')->with('succes', 'Le client à été ajouter avec succes');
     }
 
 
@@ -81,7 +82,7 @@ class ClientController extends Controller
                 'entreprise' => $request -> entreprise
             ]);
 
-            return view('dashboard')->with('succes', 'Le client à été modifier avec succes');
+            return redirect()->route('dashbord')->with('succes', 'Le client à été modifier avec succes');
         }
     }
 

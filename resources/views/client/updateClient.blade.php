@@ -22,17 +22,33 @@
                                         placeholder="Entrer votre nom complet" />
                                     <label for="inputLastName">Nom complet</label>
                                 </div>
+                                @if ($errors->has('nomComplet'))
+                                    <div class="text-danger">
+                                        {{ $errors->first('nomComplet') }}
+                                    </div>
+                                @endif
                             </div>
                         </div>
                         <div class="form-floating mb-3">
                             <input value="{{$client->num}}" maxlength="8" minlength="8" class="form-control" id="num" name="num" type="tel"
                                 placeholder="Entrer votre numero de telephone" />
                             <label for="inputEmail">Numero de telephone</label>
+                            @if ($errors->has('num'))
+                                <div class="text-danger">
+                                    {{ $errors->first('num') }}
+                                </div>
+                            @endif
                         </div>
+
                         <div class="form-floating mb-3">
                             <input value=" {{$client->mail}} " class="form-control" id="inputEmail" name="mail" type="email"
                                 placeholder="name@example" />
                             <label for="inputEmail">Adresse E-mail</label>
+                            @if ($errors->has('mail'))
+                                <div class="text-danger">
+                                    {{ $errors->first('mail') }}
+                                </div>
+                            @endif
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
@@ -49,6 +65,11 @@
                                     <input class="form-control" id="entreprise" type="text"
                                         placeholder="Nom de la structure" class="disabled" />
                                     <label for="entreprise">Nom de la structure</label>
+                                    @if ($errors->has('entreprise'))
+                                        <div class="text-danger">
+                                            {{ $errors->first('entreprise') }}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

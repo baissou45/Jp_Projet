@@ -39,7 +39,9 @@
                             <td> {{ $service->description }} </td>
                             <td class="justify-between">
                                 <a href="{{route('service.edit', $service->id)}}" class="m-2"><i class="fa fa-edit"></i></a>
-                                <i class="fa fa-trash" id="remove"></i>
+                                <a href="{{route('service.delete', $pack->id)}}">
+                                    <i class="fa fa-trash" id="remove"></i>
+                                </a>
                             </td>
                         </tr>
                     @empty

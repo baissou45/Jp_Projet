@@ -43,6 +43,7 @@
                     {{ __('Log in') }}
                 </x-jet-button>
             </div>
+            <a href="{{route('register')}}"><span>Vous n'avez pas de compte ? <a href="{{route('register')}}">Inscrivez-vous</span></a>
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>

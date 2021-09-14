@@ -37,12 +37,12 @@
                     @forelse ($packs as $pack)
                         <tr>
                             <td> {{ $pack->nom }} </td>
-                            <td> {{ $pack->prix }} </td>
+                            <td> <span class="text-success"> {{ $pack->prix }} fcfa</span> </td>
                             <td> {{ $pack->description }} </td>
                             <td>
                                 <ul>
                                     @forelse ($pack->services as $service)
-                                        <li> {{ $service->nom }} </li>
+                                        <li> {{ $service->nom . ' - ' }} <span class="text-success"> {{ $service->prix . ' fcfa' }} </span> </li>
                                     @empty
                                         <span class="text-primary">Aucun service n'est rattaché à ce pack</span>
                                     @endforelse
@@ -50,10 +50,9 @@
                             </td>
                             <td class="justify-between">
                                 <a href="{{route('pack.edit', $pack->id)}}" class="m-2"><i class="fa fa-edit"></i></a>
-                                {{-- <a href="{{route('pack.delete', $pack->id)}}"> --}}
+                                <a href="{{route('pack.delete', $pack->id)}}">
                                     <i class="fa fa-trash" id="remove"></i>
-                                {{-- </a> --}}
-                                {{-- {{ $pack->commandes->count() }} --}}
+                                </a>
                             </td>
                         </tr>
                     @empty

@@ -8,7 +8,7 @@
                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Nouveau pack</h3></div>
                     <div class="card-body">
-                        <form method="post" action="{{route('pack.quantite.update')}}">
+                        <form method="post" action="{{route('quantite.update')}}">
                             @csrf
 
                             <input type="text" value="{{$pack->id}}" name="packId" hidden>
