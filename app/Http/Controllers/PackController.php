@@ -37,7 +37,6 @@ class PackController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         } else {
-            // dd(count($request->service));
 
             $pack = new Pack;
 
@@ -47,9 +46,10 @@ class PackController extends Controller
 
             $prix = 0;
 
+            dd($request->all());
             $pack -> save();
 
-            for ($i=0; $i < count($request->service); $i++) {
+            for ($i = 0 ; $i < count($request->service); $i++) {
                 $pack->services()->attach($request->service[$i]);
 
                 $service = Service::find($request->service[$i]);
@@ -81,39 +81,50 @@ class PackController extends Controller
     }
 
 
-    // public function updatePack(Request $request){
+    public function updatePack(Request $request){
 
-    //     $validator = Validator::make($request->all(), [
-    //         'nomComplet' =>'required',
-    //         'num' => 'required',
-    //         'mail' => 'required|email',
-    //         'type' => 'required',
-    //         'entreprise' => 'nullable',
-    //     ]);
+        $validator = Validator::make($request->all(), [
 
-    //     if ($validator->fails()) {
-            // return redirect()->back()->withErrors($validator)->withInput();
-            //     } else {
+            'nom' => 'required',
+            'service[]' => 'nullable',
+            'description' => 'nullable',
+            'prix' => 'nullable',
 
-    //         $pack = Pack::find($request->id);
+        ]);
 
-    //         $pack->update([
-    //             'nomComplet' => $request -> nomComplet,
-    //             'num' => $request -> num,
-    //             'mail' => $request -> mail,
-    //             'type' => $request -> type,
-    //             'entreprise' => $request -> entreprise
-    //         ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+                } else {
 
-    //     return view('dashboard')->with('succes', 'Le pack à été ajouter avec succes');
-    //     }
-    // }
+            $pack = Pack::find($request->id);
 
-    // public function deletePack(Request $request){
+            $pack->update([
+                'nom' => $request-> nom,
+                'description' => $request-> description,
+            ]);
 
-    //         $pack = Pack::find($request->id);
-    //         $pack -> delete();
-    //         return redirect()->route('pack.index');
+            if ($request-> prix != null) {
+                $pack -> update(['prix' => $request-> prix]);
+            }
 
-    // }
+            for ($i= 0; $i < count($pack->services); $i++) {
+                $pack->services()->detach($pack->services[$i]->id);
+            }
+
+            for ($i=0; $i < count($request->service); $i++) {
+                $pack->services()->attach($request->service[$i]);
+            }
+
+            return redirect()->route('pack.quantite', $pack->id)->with('succes', 'Le pack à été créer avec succes');
+
+        }
+    }
+
+    public function deletePack(Request $request){
+
+            $pack = Pack::find($request->id);
+            $pack -> delete();
+            return redirect()->route('pack.index');
+
+    }
 }

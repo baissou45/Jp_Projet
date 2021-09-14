@@ -18,6 +18,7 @@ class CreateCommandesTable extends Migration
             $table->foreignId('client_id')->constrained()->onDelete('cascade');
             $table->foreignId('pack_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('etat')->default('En cour');
             $table->timestamps();
         });
     }

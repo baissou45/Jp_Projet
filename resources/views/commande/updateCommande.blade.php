@@ -10,7 +10,7 @@
                     <h3 class="text-center font-weight-light my-4">Nouveau client</h3>
                 </div>
                 <div class="card-body">
-                    <form method="post" action="{{route('pack.update')}}">
+                    <form method="post" action="{{route('client.update')}}">
                         @csrf
 
                         <input type="hidden" name="id" value=" {{$client->id}} ">
