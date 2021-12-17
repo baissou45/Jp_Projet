@@ -14,10 +14,12 @@
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 
-
+    @yield('style')
+    
 </head>
 
 <body class="sb-nav-fixed">
@@ -144,18 +146,84 @@
 
     <script src=" {{asset('template/js/dataTable.js')}} " crossorigin="anonymous"></script>
 
-    <script src="{{asset('template/assets/demo/chart-area-demo.js')}}"></script>
+    {{-- <script src="{{asset('template/assets/demo/chart-area-demo.js')}}"></script>
     <script src="{{asset('template/assets/demo/chart-bar-demo.js')}}"></script>
-    <script src="{{asset('template/js/datatables-simple-demo.js')}}"></script>
+    <script src="{{asset('template/js/datatables-simple-demo.js')}}"></script> --}}
 
     {{-- <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script> --}}
 
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    
+
+    {{-- <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js" type="text/javascript"></script> --}}
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.flash.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js" type="text/javascript"></script>
+    <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.print.min.js" type="text/javascript"></script>
+    
+    
+        <script>
+        $(document).ready(function() {
+
+            $('#datatablesSimple').DataTable({
+                dom: "Blfrtip",
+                    buttons: [
+                        {
+                            text: 'csv',
+                            extend: 'csvHtml5',
+                            'className': 'btn btn-primary mb-3'
+                        },
+                        {
+                            text: 'excel',
+                            extend: 'excelHtml5',
+                            'className': 'btn btn-success mb-3'
+                        },
+                        {
+                            text: 'pdf',
+                            extend: 'pdfHtml5',
+                            'className': 'btn btn-danger mb-3'
+                        },
+                        {
+                            text: 'print',
+                            extend: 'print',
+                            'className': 'btn btn-info mb-3'
+                        },  
+                    ],
+                columnDefs: [{
+                    orderable: false,
+                    targets: -1
+                }] 
+            });
+
+
+            $("ul li ul li").click(function() {
+                var i = $(this).index() + 1
+                var table = $('#quiztable').DataTable();
+                if (i == 1) {
+                    table.button('.buttons-csv').trigger();
+                } else if (i == 2) {
+                    table.button('.buttons-excel').trigger();
+                } else if (i == 3) {
+                    table.button('.buttons-pdf').trigger();
+                } else if (i == 4) {
+                    table.button('.buttons-print').trigger();
+                } 
+            });
+            
+            
+        });
+    </script>
+    
 </body>
 
 </html>
