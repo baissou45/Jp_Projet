@@ -8,13 +8,13 @@
         <li class="breadcrumb-item active">Liste des clients</li>
     </ol>
 
-    <div class="card mb-4">
+    <div class="card mb-4 display">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
             Liste des clients
         </div>
         <div class="card-body">
-            <table id="datatablesSimple">
+            <table id="datatablesSimple" class="table table-striped">
                 <thead>
                     <tr>
                         <th>Nom</th>
@@ -52,4 +52,7 @@
             </table>
         </div>
     </div>
+
+    <script>
+        
 @endsection

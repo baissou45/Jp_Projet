@@ -14,7 +14,7 @@
             Liste des packs
         </div>
         <div class="card-body">
-            <table id="datatablesSimple">
+            <table id="datatablesSimple" class="table table-striped">
                 <thead>
                     <tr>
                         <th>Nom </th>
