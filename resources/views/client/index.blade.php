@@ -4,7 +4,7 @@
 
 <h1 class="mt-4">Clients</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item"><a  href="{{route('dashbord')}}">Dashboard</a></li>
         <li class="breadcrumb-item active">Liste des clients</li>
     </ol>
 
@@ -48,10 +48,9 @@
                             <td> {{ $client->commandes->count() }} </td>
                             <td class="justify-between">
                                 <a href="{{route('client.edit', $client->id)}}" class="m-2"><i class="fa fa-edit"></i></a>
-                                {{-- <a href="{{route('client.delete', $client->id)}}"> --}}
+                                <a href="{{route('client.delete', $client->id)}}">
                                     <i class="fa fa-trash" id="remove"></i>
-                                {{-- </a> --}}
-                                {{-- {{ $client->commandes->count() }} --}}
+                                </a>
                             </td>
                         </tr>
                     @empty

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Dashboard - SB Admin</title>
+    <title>cOgiciel</title>
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
     <link href="{{ asset('template/css/styles.css') }}" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
@@ -79,7 +79,7 @@
                         </a>
                         <div class="collapse" id="commande" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="{{route('commande.add')}}">Nouvelle commandes</a>
+                                <a class="nav-link" href="{{route('commande.add')}}">Nouvelle commande</a>
                                 <a class="nav-link" href="{{route('commande.index')}}">Liste des commandes</a>
                             </nav>
                         </div>

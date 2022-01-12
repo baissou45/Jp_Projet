@@ -4,7 +4,7 @@
 
 <h1 class="mt-4">Commandes</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item"><a  href="{{route('dashbord')}}">Dashboard</a></li>
         <li class="breadcrumb-item active">Liste des commandes</li>
     </ol>
 
@@ -18,7 +18,7 @@
                 <thead>
                     <tr>
                         <th>Client</th>
-                        <th>Contact client</th>
+                        <th>Pack</th>
                         <th>Utilisateur</th>
                         <th>Prix</th>
                         <th>Etat</th>
@@ -30,7 +30,7 @@
                 <tfoot>
                     <tr>
                         <th>Client</th>
-                        <th>Contact client</th>
+                        <th>Pack</th>
                         <th>Utilisateur</th>
                         <th>Prix</th>
                         <th>Etat</th>
@@ -43,7 +43,7 @@
                     @forelse ($commandes as $commande)
                         <tr>
                             <td> {{ $commande->client->nomComplet }} </td>
-                            <td> {{ $commande->client->num }} </td>
+                            <td> {{ $commande->pack->nom }} </td>
                             <td> {{ $commande->user->name }} </td>
                             <td> {{ $commande->pack->prix }} </td>
                             <td class=" {{ ($commande->etat == 'Fini') ? 'text-success' : ( ($commande->etat == 'Annuler') ? 'text-danger' : 'text-primary' ) }} "> {{ $commande->etat }} </td>

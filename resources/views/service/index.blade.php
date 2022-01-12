@@ -4,7 +4,7 @@
 
 <h1 class="mt-4">Clients</h1>
     <ol class="breadcrumb mb-4">
-        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+        <li class="breadcrumb-item"><a  href="{{route('dashbord')}}">Dashboard</a></li>
         <li class="breadcrumb-item active">Liste des clients</li>
     </ol>
 
@@ -39,7 +39,7 @@
                             <td> {{ $service->description }} </td>
                             <td class="justify-between">
                                 <a href="{{route('service.edit', $service->id)}}" class="m-2"><i class="fa fa-edit"></i></a>
-                                <a href="{{route('service.delete', $pack->id)}}">
+                                <a href="{{route('service.delete', $service->id)}}">
                                     <i class="fa fa-trash" id="remove"></i>
                                 </a>
                             </td>
