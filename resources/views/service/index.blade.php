@@ -5,13 +5,13 @@
 <h1 class="mt-4">Clients</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a  href="{{route('dashbord')}}">Dashboard</a></li>
-        <li class="breadcrumb-item active">Liste des clients</li>
+        <li class="breadcrumb-item active">Liste des services</li>
     </ol>
 
     <div class="card mb-4 display">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
-            Liste des clients
+            Liste des services
         </div>
         <div class="card-body">
             <table id="datatablesSimple" class="table table-striped">
@@ -54,5 +54,5 @@
     </div>
 
     <script>
-        
+
 @endsection
