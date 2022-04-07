@@ -2,7 +2,7 @@
 
 @section('contenu')
 
-<h1 class="mt-4">Clients</h1>
+<h1 class="mt-4">Services</h1>
     <ol class="breadcrumb mb-4">
         <li class="breadcrumb-item"><a  href="{{route('dashbord')}}">Dashboard</a></li>
         <li class="breadcrumb-item active">Liste des services</li>
